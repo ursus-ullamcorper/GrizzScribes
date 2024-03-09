@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang = "en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="GrammorlyCSS.css">
     <title>
         Grammorly
     </title>
@@ -11,5 +14,18 @@
         <input type="file" id="fileUpload" name="fileUpload">
         <input type="submit" value="Upload File">
     </form>
+    <script>
+        function validateFile() {
+            var fileInput = document.getElementById('fileUpload');
+            var filePath = fileInput.value;
+            var allowedExtensions = /(\.txt|\.docx|\.pdf|.mp4|.mp3|.pptx)$/i;
+            if (!allowedExtensions.exec(filePath)) {
+                alert('Please upload file having extensions .txt, .docx or .pdf only.');
+                fileInput.value = '';
+                return false;
+            }
+            return true;
+        }
+    </script>
 </body>
 </html>
