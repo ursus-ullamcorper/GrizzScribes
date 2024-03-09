@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+ 
+  
+    <style>
+        .animateButton {
+            width: 200px;
+            height: 100px;
+            background-color: #FF0000; /* Red color */
+        }
+        .movingRectangle {
+            width: 200px;
+            height: 100px;
+            background-color: #FF0000; /* Red color */
+        }
+        .revealingRectangle{
+            width: 200px;
+            height: 100px;
+            background-color: #FF0000; /* Red color */
+        }
+    </style>
+
+    <script>
+
+// script.js
+const animateButton = document.getElementById('animateButton');
+const movingRectangle = document.getElementById('movingRectangle');
+const revealingRectangle = document.getElementById('revealingRectangle');
+
+animateButton.addEventListener('click', () => {
+    // Move the rectangle to the right
+    movingRectangle.style.transform = 'translateX(200px)';
+
+    // Fade out the moving rectangle
+    movingRectangle.style.opacity = 0;
+
+    // Reveal the colored rectangle underneath
+    revealingRectangle.style.opacity = 1;
+});
+</script>
+
+</body>
+</html>
