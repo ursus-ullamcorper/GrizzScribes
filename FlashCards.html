@@ -21,20 +21,31 @@
     <button id="Next-Question">Next</button>
 
     <script>
+        let isAnimationPlayed = false; // Flag to track animation state
+
         document.getElementById('animateButton').addEventListener('click', function() {
             var movingRect = document.getElementById('movingRectangle');
-            movingRect.style.transform = 'translateX(100px)';
-            movingRect.style.opacity = 0;
-            document.getElementById('revealingRectangle').style.opacity = 1;
-            // Optionally disable the animate button to prevent re-clicks during animation
-            this.disabled = true;
+            var revealingRect = document.getElementById('revealingRectangle');
+
+            if (!isAnimationPlayed) {
+                // If the animation has not been played yet, play it
+                movingRect.style.transform = 'translateX(100px)';
+                movingRect.style.opacity = 0;
+                revealingRect.style.opacity = 1;
+                this.textContent = 'Reset'; // Change button text to indicate the next action
+                isAnimationPlayed = true; // Update flag to indicate animation has been played
+            } else {
+                // If the animation has been played, reset it
+                movingRect.style.transform = 'translateX(0)';
+                movingRect.style.opacity = 1;
+                revealingRect.style.opacity = 0;
+                this.textContent = 'Animate'; // Change button text back to original
+                isAnimationPlayed = false; // Reset flag for next toggle
+            }
         });
 
-        document.getElementById('Next-Question').addEventListener('click', function() {
-            // If you want a complete reset to the page's initial state:
-            // window.location.reload();
 
-            // For a stylistic reset only:
+        document.getElementById('Next-Question').addEventListener('click', function() {
             var movingRect = document.getElementById('movingRectangle');
             var revealingRect = document.getElementById('revealingRectangle');
             movingRect.style.transform = '';
