@@ -5,15 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="FlashCards2.css">
     <title>GrizzScribes | Ignite Your Creativity</title>
-    <link rel="icon" href="C:\Users\alanl\123123\GrizzScribes\Logo.webp" type="image/webp">
+    <link rel="icon" href="question banner.jpg" type="image/webp">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.3/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
+  <div class="left">
+    <img src="left.png" alt="logo">
+</div>
+<div class="right">
+  <img src="right.png" alt="logo">
+</div>
     <section class = "carousel-section">
     <div class="carousel w-full">
         <div id="slide1" class="carousel-item relative w-full">
-          <img src="https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg" class="w-full" />
+          <img src="C:\Users\lol0l\OneDrive\Documents\GitHub\GrizzScribes\txttonotes\question banner.png" class="w-full" />
           <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
             <a href="#slide4" class="btn btn-circle">❮</a> 
             <label class="swap">
@@ -24,8 +30,9 @@
             <a href="#slide2" class="btn btn-circle">❯</a>
           </div>
         </div> 
+        
         <div id="slide2" class="carousel-item relative w-full">
-          <img src="https://daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.jpg" class="w-full" />
+          <img src="C:\Users\lol0l\OneDrive\Documents\GitHub\GrizzScribes\txttonotes\answer banner.png" class="w-full" />
           <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
             <a href="#slide1" class="btn btn-circle">❮</a>
             <label class="swap">
@@ -37,7 +44,7 @@
           </div>
         </div> 
         <div id="slide3" class="carousel-item relative w-full">
-          <img src="https://daisyui.com/images/stock/photo-1414694762283-acccc27bca85.jpg" class="w-full" />
+          <img src="C:\Users\lol0l\OneDrive\Documents\GitHub\GrizzScribes\txttonotes\question banner.png" class="w-full" />
           <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
             <a href="#slide2" class="btn btn-circle">❮</a> 
             <label class="swap">
@@ -49,7 +56,7 @@
           </div>
         </div> 
         <div id="slide4" class="carousel-item relative w-full">
-          <img src="https://daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.jpg" class="w-full" />
+          <img src="C:\Users\lol0l\OneDrive\Documents\GitHub\GrizzScribes\txttonotes\answer banner.png" class="w-full" />
           <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
             <a href="#slide3" class="btn btn-circle">❮</a> 
             <label class="swap">
@@ -63,4 +70,36 @@
       </div>
     </section>
 </body>
+<script>
+const leftButton = document.getElementById('leftButton');
+const rightButton = document.getElementById('rightButton');
+
+
+leftButton.addEventListener('click', () => {
+    // Call your custom function for left button action
+     rotateLeft();
+});
+
+rightButton.addEventListener('click', () => {
+    // Call your custom function for right button action
+   rotateRight();
+});
+
+
+function rotate_left(){
+const image = document.getElementById('myImage');
+const rotateButton = document.getElementById('rotateButton');
+let rotated = false; // Track rotation state
+
+rotateButton.addEventListener('click', () => {
+    if (rotated) {
+        image.style.transform = 'rotate(0deg)'; // Reset rotation
+    } else {
+        image.style.transform = 'rotate(45deg)'; // Rotate by 45 degrees
+    }
+    rotated = !rotated; // Toggle rotation state
+});
+}
+
+</script>
 </html>
