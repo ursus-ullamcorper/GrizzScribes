@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="FlashCards.css"> <!-- Link to the external CSS file -->
+    <title>GrizzScribes</title>
+</head>
+<body>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="fileUpload">Select a file to upload:</label>
+        <input type="file" id="fileUpload" name="fileUpload">
+        <input type="submit" value="Upload File">
+    </form>
+
+    <div class="container">
+        <div id="movingRectangle"></div>
+        <div id="revealingRectangle"></div>
+    </div>
+    <button id="animateButton">Animate</button>
+    <button id="Next-Question">Next</button>
+
+    <script>
+        let isAnimationPlayed = false; // Flag to track animation state
+
+        document.getElementById('animateButton').addEventListener('click', function() {
+            var movingRect = document.getElementById('movingRectangle');
+            var revealingRect = document.getElementById('revealingRectangle');
+
+            if (!isAnimationPlayed) {
+                // If the animation has not been played yet, play it
+                movingRect.style.transform = 'translateX(100px)';
+                movingRect.style.opacity = 0;
+                revealingRect.style.opacity = 1;
+                this.textContent = 'Reset'; // Change button text to indicate the next action
+                isAnimationPlayed = true; // Update flag to indicate animation has been played
+            } else {
+                // If the animation has been played, reset it
+                movingRect.style.transform = 'translateX(0)';
+                movingRect.style.opacity = 1;
+                revealingRect.style.opacity = 0;
+                this.textContent = 'Animate'; // Change button text back to original
+                isAnimationPlayed = false; // Reset flag for next toggle
+            }
+        });
+
+
+        document.getElementById('Next-Question').addEventListener('click', function() {
+            var movingRect = document.getElementById('movingRectangle');
+            var revealingRect = document.getElementById('revealingRectangle');
+            movingRect.style.transform = '';
+            movingRect.style.opacity = '';
+            revealingRect.style.opacity = '';
+            document.getElementById('animateButton').disabled = false; // Re-enable the animate button if it was disabled
+        });
+    </script>
+</body>
+</html>
+
+
+
