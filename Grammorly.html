@@ -1,30 +1,86 @@
 <!DOCTYPE html>
-<html lang = "en">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="GrammorlyCSS.css">
-    <title>
-        Grammorly
-    </title>
+    <link rel="stylesheet" href="GrammorlyCSS.css">
+    <title>GrizzScribes | Ignite Your Creativity</title>
+    <link rel="icon" href="C:\Users\alanl\123123\GrizzScribes\Logo.webp" type="image/webp">
 </head>
 <body>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <label for="fileUpload">Select a file to upload:</label>
-        <input type="file" id="fileUpload" name="fileUpload">
-        <input type="submit" value="Upload File">
-    </form>
+    <header class="site-header">
+        <div class="container">
+            <img src = "Logo.webp" alt = "logo" width = "50", height = "70">
+            <h1 class="logo">GrizzScribes</h1>
+            <nav class="main-navigation">
+                <ul>
+                    <li><a href="#introduction">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Take Your Dreams to the Limit!</h1>
+            <p>Discover the power of efficiency in studying with GrizzScribes.</p>
+            <a href="#services" class="btn-primary">Explore Services</a>
+        </div>
+    </section>
+
+    <main class="site-main">
+        <section id="introduction" class="section-padding">
+            <div class="container">
+                <h2>About Us</h2>
+                <p>Welcome to our site! We're delighted to have you explore our creative services tailored just for you.</p>
+                <p>We are a non-profit organization dedicated to helping young procrastinators!</p>
+            </div>
+        </section>
+        
+        <section id="services" class="section-padding">
+            <div class="container">
+                <h2>Our Services</h2>
+                <p>We offer a diverse range of services to cater to your creative needs. Let's transform your ideas into reality together.</p>
+                <p>By uploading a file, you will gain the ability to simplify studying.</p>
+            </div>
+        </section>
+        
+        <section id="upload" class="section-padding">
+            <div class="container">
+                <h2>Upload Your Document</h2>
+                <form action="/upload" method="post" enctype="multipart/form-data" onsubmit="return validateFile()">
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="fileUpload" name="fileUpload" required>
+                        <input type="submit" value="Upload File" class="btn-primary">
+                    </div>
+                    <div id="fileError" class="form-error"></div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2024 GrizzScribes. All rights reserved.</p>
+        </div>
+    </footer>
+
     <script>
         function validateFile() {
             var fileInput = document.getElementById('fileUpload');
             var filePath = fileInput.value;
-            var allowedExtensions = /(\.txt|\.docx|\.pdf|.mp4|.mp3|.pptx)$/i;
+            var allowedExtensions = /(\.txt|\.docx|\.pdf|\.mp4|\.mp3|\.pptx|.html)$/i;
+            var errorDiv = document.getElementById('fileError');
+
             if (!allowedExtensions.exec(filePath)) {
-                alert('Please upload file having extensions .txt, .docx or .pdf only.');
+                errorDiv.textContent = 'Please upload a file with one of the following extensions: .txt, .docx, .pdf, .mp4, .mp3, .pptx, or .html';
                 fileInput.value = '';
                 return false;
+            } else {
+                errorDiv.textContent = '';
+                return true;
             }
-            return true;
         }
     </script>
 </body>
