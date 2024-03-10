@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, url_for, flash
+from flask import Flask, request, redirect, url_for, flash, send_from_directory
 from werkzeug.utils import secure_filename
 import os
 import sys
@@ -82,12 +82,23 @@ def pipeline_process(file_path):
 
     summary = generate_summary(transcription, 'md')
     flashcards = json.loads(generate_summary(transcription, 'qa'))
+    
+    summary_file_path = file_path[: - len(extension)] + 'md'
+    with open(summary_file_path, 'w', encoding='utf-8') as markdown_file:
+        markdown_file.write(summary)
+
+    filename = file_path.split('/')[-1]
+    summary_download_url = url_for('download_file', filename=filename, _external=True)
 
     return {
-        'summary': summary,
+        'markdown_download_url': summary_download_url,
         'flashcards': flashcards
     }
  
+@app.route('/download/<filename>')
+def download_file(filename):
+    directory = app.config['UPLOAD_FOLDER']
+    return send_from_directory(directory, filename, as_attachment=True)
 
 if __name__ == '__main__':
     os.makedirs(UPLOAD_FOLDER, exist_ok=True)  # Create directory if it doesn't exist
