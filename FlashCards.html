@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="FlashCards.css"> <!-- Link to the external CSS file -->
+    <title>GrizzScribes</title>
+</head>
+<body>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="fileUpload">Select a file to upload:</label>
+        <input type="file" id="fileUpload" name="fileUpload">
+        <input type="submit" value="Upload File">
+    </form>
+
+    <div class="container">
+        <div id="movingRectangle"></div>
+        <div id="revealingRectangle"></div>
+    </div>
+    <button id="animateButton">Animate</button>
+    <button id="Next-Question">Next</button>
+
+    <script>
+        document.getElementById('animateButton').addEventListener('click', function() {
+            var movingRect = document.getElementById('movingRectangle');
+            movingRect.style.transform = 'translateX(100px)';
+            movingRect.style.opacity = 0;
+            document.getElementById('revealingRectangle').style.opacity = 1;
+            // Optionally disable the animate button to prevent re-clicks during animation
+            this.disabled = true;
+        });
+
+        document.getElementById('Next-Question').addEventListener('click', function() {
+            // If you want a complete reset to the page's initial state:
+            // window.location.reload();
+
+            // For a stylistic reset only:
+            var movingRect = document.getElementById('movingRectangle');
+            var revealingRect = document.getElementById('revealingRectangle');
+            movingRect.style.transform = '';
+            movingRect.style.opacity = '';
+            revealingRect.style.opacity = '';
+            document.getElementById('animateButton').disabled = false; // Re-enable the animate button if it was disabled
+        });
+    </script>
+</body>
+</html>
+
+
+
