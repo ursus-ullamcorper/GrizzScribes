@@ -57,6 +57,20 @@
                 <h2>Our Services</h2>
                 <p>We offer a diverse range of services to cater to your creative needs. Let's transform your ideas into reality together.</p>
                 <a href="#upload" class="btn-primary">Explore Services</a>
+                <p>By uploading a file, you will gain the ability to simplify studying.</p>
+            </div>
+        </section>
+        
+        <section id="upload" class="section-padding">
+            <div class="container">
+                <h2>Upload Your Document</h2>
+                <form action="http://localhost:5000/upload" method="post" onsubmit="return validateFile()">
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="fileUpload" name="file" required>
+                        <input type="submit" value="Upload File" class="btn-primary">
+                    </div>
+                    <div id="fileError" class="form-error"></div>
+                </form>
             </div>
         </section>
     </main>

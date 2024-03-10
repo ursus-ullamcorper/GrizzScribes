@@ -1,0 +1,12 @@
+.carousel-section {
+    display: flex;
+    justify-content: center;  /* Centers horizontally */
+    align-items: center;      /* Centers vertically */
+    min-height: 100vh;        /* Makes the section occupy full viewport height */
+    background-image: url("Logo.jpg");
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-left: 15em;
+    padding-right: 15em;
+}
