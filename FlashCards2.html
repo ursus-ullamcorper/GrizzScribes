@@ -11,10 +11,10 @@
 </head>
 <body>
   <div class="left">
-    <img src="left.png" alt="logo">
+    <img src="C:\Users\lol0l\OneDrive\Documents\GitHub\GrizzScribes\txttonotes\left.png" alt="logo">
 </div>
 <div class="right">
-  <img src="right.png" alt="logo">
+  <img src="C:\Users\lol0l\OneDrive\Documents\GitHub\GrizzScribes\txttonotes\right.png" alt="logo">
 </div>
     <section class = "carousel-section">
     <div class="carousel w-full">
@@ -87,18 +87,31 @@ rightButton.addEventListener('click', () => {
 
 
 function rotate_left(){
-const image = document.getElementById('myImage');
-const rotateButton = document.getElementById('rotateButton');
+const image = document.getElementById('left');
 let rotated = false; // Track rotation state
 
-rotateButton.addEventListener('click', () => {
+
     if (rotated) {
         image.style.transform = 'rotate(0deg)'; // Reset rotation
     } else {
         image.style.transform = 'rotate(45deg)'; // Rotate by 45 degrees
     }
     rotated = !rotated; // Toggle rotation state
-});
+);
+}
+
+function rotate_right(){
+const image = document.getElementById('left');
+let rotated = false; // Track rotation state
+
+
+    if (rotated) {
+        image.style.transform = 'rotate(0deg)'; // Reset rotation
+    } else {
+        image.style.transform = 'rotate(-45deg)'; // Rotate by 45 degrees
+    }
+    rotated = !rotated; // Toggle rotation state
+);
 }
 
 </script>
