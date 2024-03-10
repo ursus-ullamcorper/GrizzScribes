@@ -2,6 +2,9 @@ from flask import Flask, request, redirect, url_for, flash
 from werkzeug.utils import secure_filename
 import os
 
+from celery import Celery
+
+
 app = Flask(__name__)
 app.secret_key = 'secret_key'  # Needed for flash messages
 
@@ -9,6 +12,22 @@ app.secret_key = 'secret_key'  # Needed for flash messages
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = os.path.join(BASE_DIR, 'uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# Celery for processing jobs
+def make_celery(app):
+    celery = Celery(
+        app.import_name,
+        backend=app.config['CELERY_RESULT_BACKEND'],
+        broker=app.config['CELERY_BROKER_URL']
+    )
+    celery.conf.update(app.config)
+    return celery
+
+app.config.update(
+    CELERY_BROKER_URL='url_to_your_broker',
+    CELERY_RESULT_BACKEND='url_to_your_backend'
+)
+celery = make_celery(app)
 
 # Allowed file extensions
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'mp3'}
