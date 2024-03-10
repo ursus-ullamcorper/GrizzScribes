@@ -1,15 +1,17 @@
-from flask import Flask, request, redirect, url_for, flash, send_from_directory
+from flask import Flask, request, redirect, url_for, flash, send_from_directory, jsonify
 from werkzeug.utils import secure_filename
 import os
 import sys
 import json
 
 from celery import Celery
+from flask_cors import CORS
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'ml_pipeline')))
 from pipeline_functions import *
 
 app = Flask(__name__)
+CORS(app)
 app.secret_key = 'secret_key'  # Needed for flash messages
 
 # Directory where uploaded files will be stored
@@ -43,31 +45,14 @@ def allowed_file(filename):
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
-        # Check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
         file = request.files['file']
-        # If user does not select file, browser also
-        # submit an empty part without filename
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(file_path)
             # return redirect(url_for('upload_file', filename=filename))
-            return pipeline_process(file_path)
-    return '''
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form method=post enctype=multipart/form-data>
-      <input type=file name=file>
-      <input type=submit value=Upload>
-    </form>
-    '''
+            return jsonify(pipeline_process(file_path))
+    return jsonify({'hello': 'hello1'})
 
 def pipeline_process(file_path):
     extension = file_path.split('.')[-1]

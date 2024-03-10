@@ -3,18 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    <title>GrizzScribes | Ignite Your Creativity</title>
+    <link rel="icon" href="Logo.webp" type="image/webp">
+
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.3/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <link rel="stylesheet" href="GrammorlyCSS.css">
-    <title>GrizzScribes | Ignitre Your Creativity</title>
-    <link rel="icon" href="C:\Users\alanl\123123\GrizzScribes\Logo.webp" type="image/webp">
 </head>
 <body>
     <header class="site-header">
-        <div class="container">
+        <div class="container ">
             <!-- Logo Section -->
             <div class="header-top">
                 <div class="logo">
-                    <img src="bear head.webp" alt="logo" width="70" height="70">
-                    <h1>GrizzScribes</h1>
+                    <img src="logoGrizzHacks.webp" alt="logo" width="70" height="70">
+                    <h1 class="text-3xl font-bold">GrizzScribes</h1>
                 </div>
                 <nav class="main-navigation">
                     <a href="#about-us" class="ui-button btn-about">About Us</a>
@@ -22,45 +27,53 @@
                 </nav>
             </div>
         </div>
-        <section class="hero">
-            <h1>Take Your Dreams to the Limit!</h1>
+        <br>
+        <section class="mb-5 flex flex-col items-center">
+            <h1 class="text-lg font-bold">Take Your Dreams to the Limit!</h1>
             <p>Discover the power of efficiency in studying with GrizzScribes.</p>
         </section>
     </header>
 
+    <main class="site-main">
+      <section id="about-us" class="section-padding">
+          <div class="container flex flex-col items-center">
+              <h2 class="text-xl font-bold">About Us</h2>
+              <p>Welcome to our site! We're delighted to have you explore our creative services tailored just for you.</p>
+              <p>We are a non-profit organization dedicated to helping young procrastinators!</p>
+          </div>
+      </section>
+      
+      <section id="services" class="section-padding">
+          <div class="container flex flex-col items-center">
+              <h2 class="text-xl font-bold">Our Services</h2>
+              <p>By uploading a file, you will gain the ability to simplify studying.</p>
+              <p>You can upload recorded lecture videos (<em>mp4</em>) or recordings (<em>mp3</em>). </p>
+              <p>You can even upload presentations (<em>pptx</em>) and detailed notes (<em>pdf, doc, docx, txt</em>)</p>
+              <br>
+              <p>We will generate a <strong>summarization</strong> of the content in a structured format.</p>
+              <p>We will also prepare <strong>flashcards</strong> to help you test your knowledge.</p>
+          </div>
+      </section>
+
+    </main>
+
     <section id="upload" class="section-padding">
-        <div class="container">
-            <h2>Upload Your Document</h2>
-            <form action="/upload" method="post" enctype="multipart/form-data" onsubmit="return validateFile()">
-                <div class="file-upload-wrapper">
-                    <input type="file" id="fileUpload" name="fileUpload" required>
+        <div class="container flex flex-col items-center">
+            <h2 class="text-xl font-bold">Upload Your Document</h2>
+                <div class="file-upload-wrapper w-3/4">
+                  <input type="file" id="fileUpload" name="file" required>
                     <label for="fileUpload" class="btn-file-upload">Select File</label>
-                    <span id="file-chosen">No file chosen</span>
-                    <input type="submit" value="Upload File" class="btn-primary">
+                    <span id="file-chosen">No file chosen</span><br><br>
+                    <button id="uploadButton" type="button" class="btn btn-outline text-black" style="border: 1px solid black">Upload File</button>
                     <div id="fileError" class="form-error"></div>
                 </div>
-            </form>
         </div>
     </section>
 
-    <main class="site-main">
-        <section id="about-us" class="section-padding">
-            <div class="container">
-                <h2>About Us</h2>
-                <p>Welcome to our site! We're delighted to have you explore our creative services tailored just for you.</p>
-                <p>We are a non-profit organization dedicated to helping young procrastinators!</p>
-            </div>
-        </section>
-        
-        <section id="services" class="section-padding">
-            <div class="container">
-                <h2>Our Services</h2>
-                <p>We offer a diverse range of services to cater to your creative needs. Let's transform your ideas into reality together.</p>
-                <a href="#upload" class="btn-primary">Explore Services</a>
-                <p>By uploading a file, you will gain the ability to simplify studying.</p>
-            </div>
-        </section>
-    </main>
+    <section>
+      <div class="container flex flex-col items-center" id="upload_result">
+      </div>
+    </section>
 
     <footer class="site-footer">
         <div class="container">
@@ -74,21 +87,83 @@
             fileChosen.textContent = fileName;
         });
 
-        function validateFile() {
-            var fileInput = document.getElementById('fileUpload');
-            var filePath = fileInput.value;
-            var allowedExtensions = /(\.txt|\.docx|\.pdf|\.mp4|\.mp3|\.pptx|.html)$/i;
-            var errorDiv = document.getElementById('fileError');
+        uploadButton = document.getElementById('uploadButton');
+        uploadButton.addEventListener('click', function() {
+          const fileInput = document.getElementById('fileUpload');
+          const file = fileInput.files[0];
+          if (!file) {
+              alert('Please select a file first!');
+              return;
+          }
 
-            if (!allowedExtensions.exec(filePath)) {
-                errorDiv.textContent = 'Please upload a file with one of the following extensions: .txt, .docx, .pdf, .mp4, .mp3, .pptx, or .html';
-                fileInput.value = ''; // Reset the input
-                return false;
-            } else {
-                errorDiv.textContent = '';
-                return true;
+          const formData = new FormData();
+          formData.append('file', file); // 'file' is the name expected by the server
+          const response = fetch('http://localhost:5000/upload', {
+              method: 'POST',
+              body: formData,
+          }).then(response => {
+            console.log('yes yes')
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
             }
+            return response.json();
+          }).then(data => {
+            console.log(data); // Handle JSON response here
+
+            display_output(data)
+          }).catch(error => {
+            console.log('no no')
+          })
+
+          resultDiv = document.getElementById('upload_result');
+          resultDiv.innerHTML = '<span class="loading loading-spinner loading-lg"></span>'
+
+        })
+
+        function display_output(data) {
+          console.log('yello')
+          resultDiv = document.getElementById('upload_result');
+          resultDiv.innerHTML = '';
+
+          downloadButton = `
+            <div class="mb-4"> <a href="${data['markdown_download_url']}" download class="btn btn-success">Download Summary</a></div>
+          `
+          resultDiv.innerHTML += downloadButton;
+          
+          flashCardDiv = ''
+          data['flashcards'].forEach((pair, i) => {
+
+            pairElement = `
+            <div id="slide${i + 1}" class="carousel-item relative w-full flex flex-col items-center">
+            <label class="swap">
+              <input type="checkbox" />
+              <div class="swap-off">
+                <div class="card w-96 text-black" style="background-color: #c9a980; border: 1px solid #c9a980">
+                  <div class="card-body items-center text-center">
+                    <h2 class="card-title">Q: ${pair['question']}</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="swap-on">
+                <div class="card w-96 text-black" style="background-color: #c9a980; border: 1px solid #c9a980">
+                  <div class="card-body items-center text-center">
+                    <h2 class="card-title">A: ${pair['answer']}</h2>
+                  </div>
+                </div>
+              </div>
+            </label>
+            <div class="flex justify-between mt-3">
+              <a href="#slide${i}" class="btn btn-circle text-black" style="background-color: #c9a980" >❮</a> 
+              <a href="#slide${i + 2}" class="btn btn-circle text-black" style="background-color: #c9a980" >❯</a>
+            </div>
+          </div> 
+            `
+            flashCardDiv += pairElement;
+          });
+          resultDiv.innerHTML += `<div class="carousel w-full"> ${flashCardDiv} </div> `
+
         }
+
     </script>
 </body>
 </html>
