@@ -2,9 +2,11 @@
 Turns your notes and class recordings into a summarized version of notes and study flashcards
 ![](https://media.discordapp.net/attachments/1215079325464789083/1216242535006212216/blob.jpg?ex=65ffad21&is=65ed3821&hm=be1d782ae805f82484edaf7d42ed3b8db1597b6221f44cec35c28e8f72de8d9b&=&format=webp)
 ## Quickstart
+Make sure to run the command in the root directory: pip install -r requirements.txt 
 Run the appy.py in the flask_app folder.
 Then run the Grammorly.html in the root folder
-P.S. We too lazy to chage the original name
+
+*P.S. We too lazy to chage the original name*
 
 ## Inspiration
 As University Students, we really wanted to make something dedicated to helping Oakland University Students to be able to do better and be more efficient in their education. From this, we decided to build a study tool to help convert our notes & class material to an easily readable/studyable format.
