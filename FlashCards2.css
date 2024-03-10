@@ -3,10 +3,25 @@
     justify-content: center;  /* Centers horizontally */
     align-items: center;      /* Centers vertically */
     min-height: 100vh;        /* Makes the section occupy full viewport height */
-    background-image: url("Logo.jpg");
+    background-image: url("bear head.jpg");
     background-position: center; /* Center the image */
     background-repeat: no-repeat;
     background-size: cover;
     padding-left: 15em;
     padding-right: 15em;
 }
+.left {
+    position: relative;
+    /* Adjust top and left values as needed */
+    top: 235px;
+    left: 270px;
+    
+    transition: transform 0.5s; /* Smooth transition for rotation */
+}
+.right {
+    position: relative;
+    /* Adjust top and left values as needed */
+    top: 235px;
+    left: 270px;
+    transition: transform 0.5s; /* Smooth transition for rotation */}
+   
