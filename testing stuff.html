@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html lang = "en">
 <head>
- 
-  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="GrammorlyCSS.css">
+    <title>
+        Grammorly
+    </title>
+</head>
+<body>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="fileUpload">Select a file to upload:</label>
+        <input type="file" id="fileUpload" name="fileUpload">
+        <input type="submit" value="Upload File">
+    </form>
+
     <style>
         .animateButton {
             width: 200px;
             height: 100px;
             background-color: #FF0000; /* Red color */
         }
-        .movingRectangle {
+        .animateButton {
             width: 200px;
             height: 100px;
             background-color: #FF0000; /* Red color */
         }
-        .revealingRectangle{
-            width: 200px;
-            height: 100px;
-            background-color: #FF0000; /* Red color */
-        }
+        
     </style>
 
     <script>
