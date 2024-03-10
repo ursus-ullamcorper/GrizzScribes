@@ -1,46 +1,145 @@
-/* style.css - White and Gold Color Scheme */
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.logo {
+    margin-top: -10px;
+    margin-left: -780px;
+}
 
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    padding: 0;
-    background-color: white; /* Sets the background to white */
-    color: #333; /* A darker color for text for readability */
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #ffffff;
+    background-image: url(GrammorlyBakcgroundIMG.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
-h2 {
-    color: #D4AF37; /* A gold color for headings */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
 }
 
-form {
-    margin-top: 20px;
-    border: 2px solid #D4AF37; /* Gold border for the form */
-    padding: 20px;
-    border-radius: 8px;
+/* Header */
+.site-header {
+    background: #D4AF37;
+    color: #ffffff;
+    padding: 20px 0;
 }
 
-label, input {
-    display: block;
+.site-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+}
+
+.main-navigation ul {
+    list-style: none;
+    display: flex;
+}
+
+.main-navigation ul li {
+    margin-left: 20px;
+}
+
+.main-navigation ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.main-navigation ul li a:hover {
+    color: #f0e3c0;
+}
+
+.hero {
+    background: #D4AF37;
+    color: #ffffff;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.hero h1 {
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+.btn-primary {
+    background: #b4952d;
+    color: #ffffff;
+    padding: 10px 20px;
+    display: inline-block;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: #a8861e;
+}
+
+
+.section-padding {
+    padding: 60px 0;
+}
+
+
+.file-upload-wrapper {
+    margin: 20px 0;
+}
+
+.file-upload-wrapper input[type="file"] {
+    margin-bottom: 10px;
+}
+
+.file-upload-wrapper input[type="submit"] {
+    cursor: pointer;
+    background: #D4AF37; /* Gold */
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.file-upload-wrapper input[type="submit"]:hover {
+    background: #b4952d;
+}
+
+.form-error {
+    color: #cc0000;
     margin-top: 10px;
 }
 
-input[type="file"] {
-    border: 1px solid #ccc;
-    display: inline-block;
-    padding: 6px 12px;
-    cursor: pointer;
+/* Footer */
+.site-footer {
+    background: #333333;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px 0;
 }
 
-input[type="submit"] {
-    background-color: #D4AF37; /* Gold background for the submit button */
-    color: white; /* White text */
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold; /* Makes the button text bold */
-}
+@media (max-width: 768px) {
+    .main-navigation ul {
+        flex-direction: column;
+        text-align: center;
+    }
 
-input[type="submit"]:hover {
-    background-color: #B7950B; /* A darker gold color for the hover state */
+    .main-navigation ul li {
+        margin: 10px 0;
+    }
+
+    .hero {
+        padding: 30px 0;
+    }
 }
