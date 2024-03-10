@@ -1,145 +1,162 @@
-/* General Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-.logo {
-    margin-top: -10px;
-    margin-left: -780px;
+
+.file-upload-wrapper {
+    padding: 30px;
+    border: 4px solid #FFD700;
+    border-radius: 10px;
+    margin: 20px 0;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Adding a subtle shadow */
+    transition: transform 0.3s ease; /* Adding a smooth transition effect */
+}
+
+#fileUpload {
+    opacity: 0;
+    width: 0.1px;
+    height: 0.1px;
+    position: absolute;
+    z-index: -1;
+}
+#fileUpload + label {
+    background-color: #FFD700;
+    color: #ffffff;
+    padding: 7px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-block;
+    margin-top: 20px;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+#fileUpload + label:hover{
+    background-color: #123456;
+}
+
+.form-error {
+    color: red;
+    margin-top: 10px;
 }
 
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
     color: #333;
-    background-color: #ffffff;
     background-image: url(GrammorlyBakcgroundIMG.png);
-    background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     background-attachment: fixed;
 }
 
 .container {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
     max-width: 1200px;
-    margin: auto;
-    padding: 0 20px;
 }
 
-/* Header */
-.site-header {
-    background: #D4AF37;
-    color: #ffffff;
-    padding: 20px 0;
+.site-header, .site-footer {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background: #800000;
+    color: white;
 }
 
-.site-header .container {
+.header-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 20px;
 }
 
 .logo {
-    font-size: 24px;
-}
-
-.main-navigation ul {
-    list-style: none;
     display: flex;
+    align-items: center;
 }
 
-.main-navigation ul li {
-    margin-left: 20px;
+.logo img {
+    margin-right: 10px;
 }
 
-.main-navigation ul li a {
-    color: #ffffff;
+.main-navigation {
+    text-align: right;
+}
+
+.ui-button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
     text-decoration: none;
-    transition: color 0.3s ease;
+    font-weight: bold;
+    border: 2px solid #0056b3;
+    border-radius: 5px;
+    margin-left: 10px;
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
-.main-navigation ul li a:hover {
-    color: #f0e3c0;
+.ui-button:hover {
+    background-color: #0056b3;
+    border-color: #003d82;
 }
+
+/* Additional styles for other elements */
+
 
 .hero {
-    background: #D4AF37;
-    color: #ffffff;
-    padding: 60px 0;
+    padding: 30px 20px;
     text-align: center;
-}
-
-.hero h1 {
-    margin-bottom: 20px;
-    font-size: 32px;
-}
-
-.btn-primary {
-    background: #b4952d;
-    color: #ffffff;
-    padding: 10px 20px;
-    display: inline-block;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background 0.3s ease;
-}
-
-.btn-primary:hover {
-    background: #a8861e;
-}
-
-
-.section-padding {
-    padding: 60px 0;
-}
-
-
-.file-upload-wrapper {
-    margin: 20px 0;
-}
-
-.file-upload-wrapper input[type="file"] {
     margin-bottom: 10px;
 }
 
-.file-upload-wrapper input[type="submit"] {
-    cursor: pointer;
-    background: #D4AF37; /* Gold */
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
+.btn-primary {
+    background-color: #000000;
+    color: white;
+    padding: 10px 25px;
     border-radius: 5px;
-    transition: background 0.3s ease;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-block;
+    margin-top: 20px;
+    border: none;
+    transition: background-color 0.3s ease;
 }
 
-.file-upload-wrapper input[type="submit"]:hover {
-    background: #b4952d;
+.btn-primary:hover {
+    background: #3d79b5;
 }
 
-.form-error {
-    color: #cc0000;
-    margin-top: 10px;
+#upload .container, #about-us .container {
+    padding: 20px;
+    margin-top: 20px;
 }
 
-/* Footer */
 .site-footer {
-    background: #333333;
+    background: #000000;
     color: #ffffff;
     text-align: center;
     padding: 20px 0;
 }
 
 @media (max-width: 768px) {
-    .main-navigation ul {
-        flex-direction: column;
-        text-align: center;
-    }
-
     .main-navigation ul li {
-        margin: 10px 0;
+        margin: 5px 5px;
     }
-
-    .hero {
-        padding: 30px 0;
+    .main-navigation ul li a {
+        padding: 8px 12px;
+    }
+    .hero, .site-header, .site-footer {
+        padding: 30px 20px;
+    }
+    .logo {
+        display: flex;
+        align-items: center;
     }
 }
