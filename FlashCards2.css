@@ -10,3 +10,18 @@
     padding-left: 15em;
     padding-right: 15em;
 }
+.left {
+    position: relative;
+    /* Adjust top and left values as needed */
+    top: 235px;
+    left: 270px;
+    
+    transition: transform 0.5s; /* Smooth transition for rotation */
+}
+.right {
+    position: relative;
+    /* Adjust top and left values as needed */
+    top: 235px;
+    left: 270px;
+    transition: transform 0.5s; /* Smooth transition for rotation */}
+   
