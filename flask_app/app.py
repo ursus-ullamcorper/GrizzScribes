@@ -87,7 +87,7 @@ def pipeline_process(file_path):
     with open(summary_file_path, 'w', encoding='utf-8') as markdown_file:
         markdown_file.write(summary)
 
-    filename = file_path.split('/')[-1]
+    filename = summary_file_path.split('/')[-1]
     summary_download_url = url_for('download_file', filename=filename, _external=True)
 
     return {
