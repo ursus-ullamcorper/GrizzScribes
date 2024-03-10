@@ -10,27 +10,41 @@
 <body>
     <header class="site-header">
         <div class="container">
-            <img src = "Logo.webp" alt = "logo" width = "50", height = "70">
-            <h1 class="logo">GrizzScribes</h1>
-            <nav class="main-navigation">
-                <ul>
-                    <li><a href="#introduction">About Us</a></li>
-                    <li><a href="#services">Services</a></li> 
-                </ul>
-            </nav>
+            <!-- Logo Section -->
+            <div class="header-top">
+                <div class="logo">
+                    <img src="logoGrizzHacks.webp" alt="logo" width="70" height="70">
+                    <h1>GrizzScribes</h1>
+                </div>
+                <nav class="main-navigation">
+                    <a href="#about-us" class="ui-button btn-about">About Us</a>
+                    <a href="#services" class="ui-button btn-services">Services</a>
+                </nav>
+            </div>
         </div>
-    </header>
-
-    <section class="hero">
-        <div class="container">
+        <section class="hero">
             <h1>Take Your Dreams to the Limit!</h1>
             <p>Discover the power of efficiency in studying with GrizzScribes.</p>
-            <a href="#services" class="btn-primary">Explore Services</a>
+        </section>
+    </header>
+
+    <section id="upload" class="section-padding">
+        <div class="container">
+            <h2>Upload Your Document</h2>
+            <form action="/upload" method="post" enctype="multipart/form-data" onsubmit="return validateFile()">
+                <div class="file-upload-wrapper">
+                    <input type="file" id="fileUpload" name="fileUpload" required>
+                    <label for="fileUpload" class="btn-file-upload">Select File</label>
+                    <span id="file-chosen">No file chosen</span>
+                    <input type="submit" value="Upload File" class="btn-primary">
+                    <div id="fileError" class="form-error"></div>
+                </div>
+            </form>
         </div>
     </section>
 
     <main class="site-main">
-        <section id="introduction" class="section-padding">
+        <section id="about-us" class="section-padding">
             <div class="container">
                 <h2>About Us</h2>
                 <p>Welcome to our site! We're delighted to have you explore our creative services tailored just for you.</p>
@@ -42,6 +56,7 @@
             <div class="container">
                 <h2>Our Services</h2>
                 <p>We offer a diverse range of services to cater to your creative needs. Let's transform your ideas into reality together.</p>
+                <a href="#upload" class="btn-primary">Explore Services</a>
                 <p>By uploading a file, you will gain the ability to simplify studying.</p>
             </div>
         </section>
