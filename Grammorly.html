@@ -15,7 +15,7 @@
             <nav class="main-navigation">
                 <ul>
                     <li><a href="#introduction">About Us</a></li>
-                    <li><a href="#services">Services</a></li>
+                    <li><a href="#services">Services</a></li> 
                 </ul>
             </nav>
         </div>
@@ -49,14 +49,17 @@
         <section id="upload" class="section-padding">
             <div class="container">
                 <h2>Upload Your Document</h2>
-                <form action="http://localhost:5000/upload" method="post" onsubmit="return validateFile()">
-                    <div class="file-upload-wrapper">
-                        <input type="file" id="fileUpload" name="file" required>
-                        <input type="submit" value="Upload File" class="btn-primary">
-                    </div>
-                    <div id="fileError" class="form-error"></div>
-                </form>
+                <div class="file-upload-wrapper">
+                    <input type="file" id="fileUpload" name="file" required>
+                    <button id="uploadButton" type="button" class="btn-primary">Upload File</button>
+                </div>
+                <div id="fileError" class="form-error"></div>
             </div>
+        </section>
+
+        <section id="upload_result">
+
+
         </section>
     </main>
 
@@ -66,21 +69,55 @@
         </div>
     </footer>
     <script>
-        function validateFile() {
-            var fileInput = document.getElementById('fileUpload');
-            var filePath = fileInput.value;
-            var allowedExtensions = /(\.txt|\.docx|\.pdf|\.mp4|\.mp3|\.pptx|.html)$/i;
-            var errorDiv = document.getElementById('fileError');
+   
 
-            if (!allowedExtensions.exec(filePath)) {
-                errorDiv.textContent = 'Please upload a file with one of the following extensions: .txt, .docx, .pdf, .mp4, .mp3, .pptx, or .html';
-                fileInput.value = '';
-                return false;
-            } else {
-                errorDiv.textContent = '';
-                return true;
+        uploadButton = document.getElementById('uploadButton');
+        uploadButton.addEventListener('click', function() {
+          const fileInput = document.getElementById('fileUpload');
+          const file = fileInput.files[0];
+          if (!file) {
+              alert('Please select a file first!');
+              return;
+          }
+
+          const formData = new FormData();
+          formData.append('file', file); // 'file' is the name expected by the server
+          const response = fetch('http://localhost:5000/upload', {
+              method: 'POST',
+              body: formData,
+          }).then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
             }
+            return response.json();
+          }).then(data => {
+            console.log(data); // Handle JSON response here
+            document.getElementById('upload_result').textContent = JSON.stringify(data, null, 2);
+
+            display_output(data)
+          }).catch(error => {
+            console.log('no no')
+          })
+        })
+
+        function display_output(data) {
+          resultDiv = document.getElementById('upload_result');
+          resultDiv.innerHTML = '';
+
+          downloadButton = `
+            <a href="${data['markdown_download_url']}" download class="">Download File</a>
+          `
+          resultDiv.innerHTML += downloadButton;
+          
+          data['flashcards'].forEach(pair => {
+            pairElement = `
+              <div>${pair['question']} | ${pair['answer']}</div>
+            `
+            resultDiv.innerHTML += pairElement;
+          });
+          
         }
+
     </script>
 </body>
 </html>
