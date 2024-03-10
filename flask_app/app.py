@@ -1,9 +1,13 @@
 from flask import Flask, request, redirect, url_for, flash
 from werkzeug.utils import secure_filename
 import os
+import sys
+import json
 
 from celery import Celery
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'ml_pipeline')))
+from pipeline_functions import *
 
 app = Flask(__name__)
 app.secret_key = 'secret_key'  # Needed for flash messages
@@ -30,7 +34,7 @@ app.config.update(
 celery = make_celery(app)
 
 # Allowed file extensions
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'mp3'}
+ALLOWED_EXTENSIONS = {'mp4', 'mp3', 'pdf', 'doc', 'docx', 'txt', 'pptx'}
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -51,8 +55,10 @@ def upload_file():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('upload_file', filename=filename))
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(file_path)
+            # return redirect(url_for('upload_file', filename=filename))
+            return pipeline_process(file_path)
     return '''
     <!doctype html>
     <title>Upload new File</title>
@@ -62,6 +68,26 @@ def upload_file():
       <input type=submit value=Upload>
     </form>
     '''
+
+def pipeline_process(file_path):
+    extension = file_path.split('.')[-1]
+    if extension == 'mp4':
+        file_path = mp4_to_mp3(file_path)
+        extension = 'mp3'
+    
+    if extension == 'mp3':
+        transcription = speech_to_text(file_path)
+    else:
+        transcription = extract_text_from_file(file_path)
+
+    summary = generate_summary(transcription, 'md')
+    flashcards = json.loads(generate_summary(transcription, 'qa'))
+
+    return {
+        'summary': summary,
+        'flashcards': flashcards
+    }
+ 
 
 if __name__ == '__main__':
     os.makedirs(UPLOAD_FOLDER, exist_ok=True)  # Create directory if it doesn't exist

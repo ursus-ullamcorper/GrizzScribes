@@ -2,8 +2,9 @@ from openai import OpenAI
 from tika import parser
 from moviepy.editor import *
 
+client = OpenAI()
+
 def speech_to_text(file_path):
-    client = OpenAI()
     audio_file = open(file_path, "rb")
     transcription = client.audio.transcriptions.create(
         model="whisper-1",  
@@ -37,3 +38,22 @@ def mp4_to_mp3(file_path):
     video_clip.close()
 
     return mp3_file_path
+
+def generate_summary(text, type):
+    if type == 'md':
+        prompt = "Convert this text into a summary as class notes in markdown code: "
+    elif type == 'qa':
+        prompt = """
+        Given these class notes, I want you to generate a JSON output for students to use as flashcards. They should be a list of items of
+        the form {"question" : <QUESTION>,  "answer" : <ANSWER>}: 
+        """
+
+    prompt += text
+
+    completion = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "user", "content": prompt} 
+        ]
+    )
+    return completion.choices[0].message.content
