@@ -9,7 +9,7 @@ def summarize_text(text):
     return f"## Summary\n{summary_text}"
 
 # Example usage
-text_file = "path/to/your/textfile.txt"
+text_file = "test.txt"
 with open(text_file, 'r') as file:
     text_to_summarize = file.read()
 
